@@ -1,6 +1,6 @@
 import React from 'react'
 import nature from "../assets/nature.jpg";
-import flowers from "../assets/flowers.jpg";
+import science from "../assets/science.jpg";
 import red_mushroom from "../assets/red_mushroom.jpg";
 import Carousel from 'react-bootstrap/Carousel';
 function SliderPage() {
@@ -15,20 +15,20 @@ function SliderPage() {
           style={{height:"600px"}}
         />
         <Carousel.Caption>
-          <h3>First slide label</h3>
+          <h3>Peace of Nature</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={flowers}
+          src={science}
           alt="Second slide"
           style={{height:"600px"}}
         />
 
         <Carousel.Caption>
-          <h3>Second slide label</h3>
+          <h3>Science! Curse or Bliss !</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </Carousel.Caption>
       </Carousel.Item>
