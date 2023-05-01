@@ -2,17 +2,25 @@ import logo from './logo.svg';
 import './App.css';
 import { lazy ,Suspense} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route,Switch, Redirect  } from "react-router-dom";
+const SignIn =lazy(()=>import('./page/SignIn'));
 
 const Home = lazy(()=>import("./page/Home"))
 const Navbar = lazy(()=> import("./components/Navbar"))
-function App() {
+function App() {  
+
   return (
    <div className='App'>
+   <BrowserRouter>
     <Suspense fallback={<div>Loading...</div>}>
-     <Navbar/>
-     <Home />
   
+     <Switch>
+     <Route exact path="/" render={() => <><Navbar /><Home /></>} />
+     <Route path="/signIn" component={SignIn}/>
+    
+     </Switch>
     </Suspense>
+    </BrowserRouter>
     </div>
  
   );

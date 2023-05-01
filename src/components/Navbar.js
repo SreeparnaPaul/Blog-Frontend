@@ -12,9 +12,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { useHistory } from 'react-router-dom';
 
 const pages = ['Home', 'About', 'Blogs'];
-const settings = ['Profile', 'Login', 'Register', 'Logout'];
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -34,7 +35,7 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const history = useHistory()
   return (
     <AppBar position="static">
       <Container maxWidth="xl" style={{backgroundColor:"#363434"}}>
@@ -87,11 +88,22 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+             
+                <MenuItem onClick={(e)=>{
+                  e.preventDefault()
+                  history.push("/")
+                
+                }}>
+                  <Typography textAlign="center" component="a"
+                  href="/">Home</Typography>
                 </MenuItem>
-              ))}
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">About</Typography>
+                </MenuItem>
+                <MenuItem  onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Blogs</Typography>
+                </MenuItem>
+           
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -99,7 +111,7 @@ function ResponsiveAppBar() {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -124,36 +136,12 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+              <Button style={{color:"white"}} onClick={(e)=>{
+                e.preventDefault()
+                history.push("/signIn")
+              
+              }}>Sign In</Button>
+          
         </Toolbar>
       </Container>
     </AppBar>
