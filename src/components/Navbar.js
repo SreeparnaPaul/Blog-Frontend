@@ -141,7 +141,11 @@ function ResponsiveAppBar() {
                 history.push("/signIn")
               
               }}>Sign In</Button>
-          
+              <Button style={{color:"white"}} onClick={(e)=>{
+                e.preventDefault()
+                history.push("/registration")
+              
+              }}>Sign Up</Button>
         </Toolbar>
       </Container>
     </AppBar>

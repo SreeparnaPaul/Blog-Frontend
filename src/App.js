@@ -3,6 +3,7 @@ import './App.css';
 import { lazy ,Suspense} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route,Switch, Redirect  } from "react-router-dom";
+const Registration=lazy(()=>import('./page/Registration')) ;
 const SignIn =lazy(()=>import('./page/SignIn'));
 
 const Home = lazy(()=>import("./page/Home"))
@@ -17,7 +18,7 @@ function App() {
      <Switch>
      <Route exact path="/" render={() => <><Navbar /><Home /></>} />
      <Route path="/signIn" component={SignIn}/>
-    
+     <Route path="/registration" component={Registration}/>
      </Switch>
     </Suspense>
     </BrowserRouter>
