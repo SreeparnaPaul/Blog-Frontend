@@ -11,11 +11,7 @@ function CategoryCardForHome() {
      <h1> Categories</h1>
       </Card.Title>
       <Card.Body>
-      
         <CategoryType/>
-      
-     
-     
       </Card.Body>
       </Card>
     </div>
