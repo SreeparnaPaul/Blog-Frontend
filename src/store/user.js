@@ -50,7 +50,7 @@ export const loadUsers = () =>apiCallBegan({
     onError:apiRequestFailed.type
 })
 
-export const addUsers = (signInFormData) => apiCallBegan({
+export const createUsers = (signInFormData) => apiCallBegan({
     url:"/user/create-user",
     method:"POST",
     data: signInFormData,

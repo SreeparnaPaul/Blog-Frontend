@@ -7,7 +7,8 @@ import LockIcon from '@mui/icons-material/Lock';
 import { useHistory } from 'react-router-dom';
 import { Link} from 'react-router-dom';
 import login from "../assets/login.jpg"
-
+import { useDispatch } from "react-redux";
+import { createUsers } from '../store/user';
 function Registration() {
     const [signInFormData,setSignInFormData]=useState({
         email:"",
@@ -28,47 +29,25 @@ function Registration() {
           [event.target.name]: event.target.value,
         });
       };
+    const dispatch = useDispatch()
       const handleSubmit = async (event) => {
         event.preventDefault();
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
             setLoader(true)
-        //   try {
-        //     const response = await fetch(`${process.env.REACT_APP_API_PASSWORD}/createPassword`, {
-        //       method: 'POST',
-        //       headers: {
-        //         'Content-Type': 'application/json',
-        //       },
-        //       body: JSON.stringify(signInFormData),
-        //     });
-        //     if (!response.ok) {
-        //       throw new Error('Network response was not ok');
-        //     }
-        //     setLoader(false);
-        //                     swal({
-        //                         title: "Success",
-        //                         text: "Password added successfully",
-        //                         icon: "success",
-        //                     })
-                    history.push("/signIn")
-
-        //     console.log('Form submitted:', signInFormData);
-            
-        //   } catch (error) {
-        //     setLoader(false);
-        //     swal(
-
-        //         {
-        //             title: "Something went wrong",
-        //             text: error,
-        //             icon: "danger",
-        //             button: "Close",
-        //         })
-        //     console.error('There was an error submitting the form:', error);
-            
-        //   }
+            dispatch(createUsers(signInFormData))
+            .then(() => {
+              setLoader(false);
+              sweetAlert("Success", "User registered successfully", "success");
+             history.push("/signIn")
+            })
+            .catch((error) => {
+              setLoader(false);
+              sweetAlert("Something went wrong", error.message, "danger", "Close");
+              console.error(error);
+            });
         } else {
-            setLoader(false)
+          setLoader(false);
           setErrors(formErrors);
         }
       };
