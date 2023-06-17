@@ -9,7 +9,7 @@ import { Link} from 'react-router-dom';
 import login from "../assets/login.jpg"
 import { useDispatch } from "react-redux";
 import { createUsers } from '../store/user';
-import { sweetAlert } from '../utils/sweetAlert';
+import { sweetAlert } from "../Utils/sweetAlert";
 function Registration() {
     const [signInFormData,setSignInFormData]=useState({
         email:"",

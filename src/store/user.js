@@ -44,7 +44,7 @@ export default userSlice.reducer;
 //Action creators
 
 export const loadUsers = () =>apiCallBegan({
-    url:url,
+    url:`/user`,
     onStart:apiRequested.type,
     onSuccess:getUsers.type,
     onError:apiRequestFailed.type

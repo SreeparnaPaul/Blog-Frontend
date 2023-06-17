@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiCallBegan } from "../store/api";
+import  {apiCallBegan} from "../api"
 const api = ({dispatch}) => next => async action =>{
     if(action.type!==apiCallBegan.type) return next(action)
 
@@ -8,7 +8,7 @@ const api = ({dispatch}) => next => async action =>{
     if(onStart) dispatch({type:onStart})
     try {
         const response = await axios.request({
-            baseURL:"http://localhost:5000/api",
+            baseURL:`${process.env.REACT_APP_API}`,
             url,
             method,
             data

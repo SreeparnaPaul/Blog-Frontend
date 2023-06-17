@@ -3,6 +3,8 @@ import './App.css';
 import { lazy ,Suspense} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route,Switch, Redirect  } from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from "../src/store/configureStore"
 const Registration=lazy(()=>import('./page/Registration')) ;
 const SignIn =lazy(()=>import('./page/SignIn'));
 
@@ -12,6 +14,7 @@ function App() {
 
   return (
    <div className='App'>
+   <Provider store={store}>
    <BrowserRouter>
     <Suspense fallback={<div>Loading...</div>}>
   
@@ -22,6 +25,7 @@ function App() {
      </Switch>
     </Suspense>
     </BrowserRouter>
+    </Provider>
     </div>
  
   );

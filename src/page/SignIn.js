@@ -6,6 +6,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link, useHistory } from 'react-router-dom';
 import login from "../assets/login.jpg"
+import Auth from '../Authentication/Auth';
 
 function SignIn() {
     const [signInFormData,setSignInFormData]=useState({
@@ -17,6 +18,7 @@ function SignIn() {
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const [errors, setErrors] = useState({});
     const [loader,setLoader]=useState(false)
+    const {login} = Auth()
     const handleChange = (event) => {
         setSignInFormData({
           ...signInFormData,
@@ -27,40 +29,7 @@ function SignIn() {
         event.preventDefault();
         const formErrors = validateForm();
         if (Object.keys(formErrors).length === 0) {
-            setLoader(true)
-        //   try {
-        //     const response = await fetch(`${process.env.REACT_APP_API_PASSWORD}/createPassword`, {
-        //       method: 'POST',
-        //       headers: {
-        //         'Content-Type': 'application/json',
-        //       },
-        //       body: JSON.stringify(signInFormData),
-        //     });
-        //     if (!response.ok) {
-        //       throw new Error('Network response was not ok');
-        //     }
-        //     setLoader(false);
-        //                     swal({
-        //                         title: "Success",
-        //                         text: "Password added successfully",
-        //                         icon: "success",
-        //                     })
-                history.push("/")
-        //     console.log('Form submitted:', signInFormData);
-            
-        //   } catch (error) {
-        //     setLoader(false);
-        //     swal(
-
-        //         {
-        //             title: "Something went wrong",
-        //             text: error,
-        //             icon: "danger",
-        //             button: "Close",
-        //         })
-        //     console.error('There was an error submitting the form:', error);
-            
-        //   }
+           login(signInFormData?.email,signInFormData?.password)
         } else {
             setLoader(false)
           setErrors(formErrors);
