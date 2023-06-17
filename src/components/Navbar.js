@@ -22,6 +22,8 @@ const pages = ['Home', 'About', 'Blogs'];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -36,6 +38,13 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
   };
   const history = useHistory()
   const location = useLocation()
@@ -142,20 +151,46 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-         {token?<Button style={{color:"white"}} 
-        //  onClick={(e)=>{
-        //     e.preventDefault()  
-        //   }}
-          >{location?.state?.userDetails?.firstName} {location?.state?.userDetails?.lastName}</Button>:
+         {token?
+        //   <Button style={{color:"white"}} 
+        // //  onClick={(e)=>{
+        // //     e.preventDefault()  
+        // //   }}
+        //   >{location?.state?.userDetails?.firstName} {location?.state?.userDetails?.lastName}</Button>
+          <Box sx={{ flexGrow: 0}}>
+          <Tooltip title="More">
+            <IconButton onClick={handleMenu} sx={{ p: 0 ,color:"white"}}>
+              <Avatar style={{marginRight:"5px"}} />{location?.state?.userDetails?.firstName} {location?.state?.userDetails?.lastName}
+            </IconButton>
+          </Tooltip>
+          <Menu
+          id="menu-appbar"
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+          <MenuItem onClick={handleClose}>Write Blog</MenuItem>
+          <MenuItem onClick={handleClose}>Your Blogs</MenuItem>
+          <MenuItem  onClick={()=>  logout() }>Log out</MenuItem>
+        </Menu>
+        </Box>:
               <Button style={{color:"white"}} onClick={(e)=>{
                 e.preventDefault()
                 history.push("/signIn")
               
               }}>Sign In</Button>}
 
-           {token?  <Button style={{color:"white"}} 
-           onClick={()=>  logout() }
-            >Log Out</Button>:  <Button style={{color:"white"}} onClick={(e)=>{
+           {token? null :<Button style={{color:"white"}} onClick={(e)=>{
             e.preventDefault()
             history.push("/registration")
           
