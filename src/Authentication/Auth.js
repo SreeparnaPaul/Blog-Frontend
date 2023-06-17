@@ -29,27 +29,28 @@ const Auth = () => {
       headers.append("Content-Type", "application/json");
       headers.append("Accept", "application/json");
       // Send a request to your authentication server
+      console.log(username,password,"line12");
       await fetch(`${process.env.REACT_APP_API}/authentication/login`, {
         method: "POST",
         headers: headers,
         credentials: "include",
         body: JSON.stringify({
-          email: username,
-          channel:"web",
-          password:password
+            channel:"web",
+            password:password,
+            username: username,     
         }),
       })
         .then((e) => e.json())
-        .then((data) => {
-            console.log(data,"line44");
-          if (data.error === "No") {
+        .then((response) => {
+            console.log(response,"line44");
+          if (response.message === "SUCCESSFUL") {
             // const token = data;
 
             // Store the token in the state
-            localStorage.setItem("token", JSON.stringify(data?.token));
+            localStorage.setItem("token", JSON.stringify(response?.data?.token));
 
             // localStorage.setItem("loggedInUser", JSON.stringify(data?.Data));
-            setToken(JSON.stringify(data?.token));
+            setToken(JSON.stringify(response?.data?.token));
             // setUserData(JSON.stringify(data?.Data));
            
               history.push({

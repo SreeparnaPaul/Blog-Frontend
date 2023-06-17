@@ -5,7 +5,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { Link, useHistory } from 'react-router-dom';
-import login from "../assets/login.jpg"
+import loginImage from "../assets/login.jpg"
 import Auth from '../Authentication/Auth';
 
 function SignIn() {
@@ -51,7 +51,7 @@ function SignIn() {
       };
   return (
     <div style={{ 
-      backgroundImage: `url(${login})`,
+      backgroundImage: `url(${loginImage})`,
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
       height: "100vh",
