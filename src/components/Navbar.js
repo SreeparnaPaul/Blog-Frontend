@@ -13,6 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import Auth from '../Authentication/Auth';
 
 const pages = ['Home', 'About', 'Blogs'];
 
@@ -36,6 +38,10 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
   const history = useHistory()
+  const location = useLocation()
+  const token = JSON.parse(localStorage.getItem("token"));
+
+  const {logout} = Auth()
   return (
     <AppBar position="static">
       <Container maxWidth="xl" style={{backgroundColor:"#363434"}}>
@@ -136,16 +142,24 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
+         {token?<Button style={{color:"white"}} 
+        //  onClick={(e)=>{
+        //     e.preventDefault()  
+        //   }}
+          >{location?.state?.userDetails?.firstName} {location?.state?.userDetails?.lastName}</Button>:
               <Button style={{color:"white"}} onClick={(e)=>{
                 e.preventDefault()
                 history.push("/signIn")
               
-              }}>Sign In</Button>
-              <Button style={{color:"white"}} onClick={(e)=>{
-                e.preventDefault()
-                history.push("/registration")
-              
-              }}>Sign Up</Button>
+              }}>Sign In</Button>}
+
+           {token?  <Button style={{color:"white"}} 
+           onClick={()=>  logout() }
+            >Log Out</Button>:  <Button style={{color:"white"}} onClick={(e)=>{
+            e.preventDefault()
+            history.push("/registration")
+          
+          }}>Sign Up</Button>} 
         </Toolbar>
       </Container>
     </AppBar>

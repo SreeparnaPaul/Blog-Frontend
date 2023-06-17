@@ -4,9 +4,9 @@ import { sweetAlert } from "../Utils/sweetAlert";
 
 const Auth = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
-//   const [userData, setUserData] = useState(
-//     localStorage.getItem("loggedInUser")
-//   );
+  const [userData, setUserData] = useState(
+    localStorage.getItem("loggedInUser")
+  );
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
@@ -14,13 +14,45 @@ const Auth = () => {
     // Save the token to local storage whenever it changes
     if (token) {
       localStorage.setItem("token", token);
-    //   localStorage.setItem("loggedInUser", userData);
+      localStorage.setItem("loggedInUser", userData);
     } else {
-    //   localStorage.removeItem("loggedInUser");
+     localStorage.removeItem("loggedInUser");
       localStorage.removeItem("token");
     }
   }, [token]);
 
+  const getUser=(token)=>{
+    var myHeaders = new Headers();
+    myHeaders.append("accept", "*/*");
+    console.log("in getuser");
+   if (token) {
+    console.log(token,"inif");
+    myHeaders.append("Authorization", token)
+    }
+console.log(myHeaders,"myHeaders");
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders,
+  redirect: 'follow',
+  credentials:"include"
+};
+console.log({requestOptions});
+fetch(`${process.env.REACT_APP_API}/user`, requestOptions)
+  .then(response => response.json())
+  .then(result => {
+    console.log(result)
+    localStorage?.setItem("loggedInUser",JSON.stringify(result?.data))
+    setUserData(JSON.stringify(result?.data))
+    history.push({
+        pathname: "/",
+        state: {
+          userDetails: result?.data,
+        },
+      });
+  }
+   )
+  .catch(error => console.log('error', error));
+  }
   // Function to handle user login
   const login = async (username, password) => {
     setIsLoading(true);
@@ -42,25 +74,15 @@ const Auth = () => {
       })
         .then((e) => e.json())
         .then((response) => {
-            console.log(response,"line44");
+           
           if (response.message === "SUCCESSFUL") {
             // const token = data;
 
             // Store the token in the state
             localStorage.setItem("token", JSON.stringify(response?.data?.token));
 
-            // localStorage.setItem("loggedInUser", JSON.stringify(data?.Data));
             setToken(JSON.stringify(response?.data?.token));
-            // setUserData(JSON.stringify(data?.Data));
-           
-              history.push({
-                pathname: "/",
-                // state: {
-                //   userEmail: data?.Data?.email,
-                //   admin: data?.Data?.isAdmin,
-                // },
-              });
-         
+            getUser(response?.data?.token)
             setError(null);
           } else {
             // Handle login error
@@ -119,7 +141,7 @@ const Auth = () => {
       setError("An error occurred during login");
       window.location.href = "/signIn";
       localStorage.removeItem("token");
-    //   localStorage.removeItem("loggedInUser");
+      localStorage.removeItem("loggedInUser");
       localStorage.clear();
       // sweetAlert("Error", "Refesh token error:" + error, "Error");
       // setToken(null);
@@ -131,17 +153,17 @@ const Auth = () => {
   // Function to handle user logout
   const logout = async () => {
     localStorage.removeItem("token");
-    // localStorage.removeItem("loggedInUser");
+     localStorage.removeItem("loggedInUser");
     localStorage.clear();
     window.location.reload();
     // Send a request to your authentication server
     var requestOptions = {
-      method: "DELETE",
+      method: "POST",
       redirect: "follow",
       credentials: "include",
     };
 
-    await fetch(`${process.env.REACT_APP_API}/userAuth`, requestOptions)
+    await fetch(`${process.env.REACT_APP_API}/authentication/logout`, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
