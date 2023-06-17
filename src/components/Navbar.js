@@ -152,11 +152,6 @@ function ResponsiveAppBar() {
             ))}
           </Box>
          {token?
-        //   <Button style={{color:"white"}} 
-        // //  onClick={(e)=>{
-        // //     e.preventDefault()  
-        // //   }}
-        //   >{location?.state?.userDetails?.firstName} {location?.state?.userDetails?.lastName}</Button>
           <Box sx={{ flexGrow: 0}}>
           <Tooltip title="More">
             <IconButton onClick={handleMenu} sx={{ p: 0 ,color:"white"}}>

@@ -21,26 +21,22 @@ const Auth = () => {
     }
   }, [token]);
 
-  const getUser=(token)=>{
+const getUser=(token)=>{
     var myHeaders = new Headers();
     myHeaders.append("accept", "*/*");
-    console.log("in getuser");
    if (token) {
-    console.log(token,"inif");
     myHeaders.append("Authorization", token)
     }
-console.log(myHeaders,"myHeaders");
 var requestOptions = {
   method: 'GET',
   headers: myHeaders,
   redirect: 'follow',
   credentials:"include"
 };
-console.log({requestOptions});
+
 fetch(`${process.env.REACT_APP_API}/user`, requestOptions)
   .then(response => response.json())
   .then(result => {
-    console.log(result)
     localStorage?.setItem("loggedInUser",JSON.stringify(result?.data))
     setUserData(JSON.stringify(result?.data))
     history.push({
@@ -60,8 +56,6 @@ fetch(`${process.env.REACT_APP_API}/user`, requestOptions)
       var headers = new Headers();
       headers.append("Content-Type", "application/json");
       headers.append("Accept", "application/json");
-      // Send a request to your authentication server
-      console.log(username,password,"line12");
       await fetch(`${process.env.REACT_APP_API}/authentication/login`, {
         method: "POST",
         headers: headers,
