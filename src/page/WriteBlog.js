@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ImageUploader from '../components/ImageUploader'
 import {Form} from "react-bootstrap"
-import { TextField,InputLabel,MenuItem,FormControl,Select } from '@mui/material'
+import { TextField,InputLabel,MenuItem,FormControl,Select, Button } from '@mui/material'
 import { Editor } from '@tinymce/tinymce-react';
 
 function WriteBlog() {
@@ -90,6 +90,10 @@ function WriteBlog() {
     </div>
       </Form>
       </div>
+       </div>
+      <div style={{display:"flex",justifyContent:"center"}}>
+      <Button variant="contained" style={{marginRight:"5px"}}> Submit </Button>
+      <Button variant='light' style={{border:"1px solid black"}}> Cancel </Button>
       </div>
     </div>
   )
