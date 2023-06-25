@@ -174,7 +174,10 @@ function ResponsiveAppBar() {
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>Write Blog</MenuItem>
+          <MenuItem onClick={(e)=>{
+            e.preventDefault()
+            history.push("/writeBlog")     
+          }}>Write Blog</MenuItem>
           <MenuItem onClick={handleClose}>Your Blogs</MenuItem>
           <MenuItem  onClick={()=>  logout() }>Log out</MenuItem>
         </Menu>

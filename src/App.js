@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route,Switch, Redirect  } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from "../src/store/configureStore"
+const WriteBlog =lazy(()=>import('./page/WriteBlog'));
 const Registration=lazy(()=>import('./page/Registration')) ;
 const SignIn =lazy(()=>import('./page/SignIn'));
 
@@ -22,6 +23,7 @@ function App() {
      <Route exact path="/" render={() => <><Navbar /><Home /></>} />
      <Route path="/signIn" component={SignIn}/>
      <Route path="/registration" component={Registration}/>
+     <Route path="/writeBlog" render={() => <><Navbar /><WriteBlog /></>} />
      </Switch>
     </Suspense>
     </BrowserRouter>
