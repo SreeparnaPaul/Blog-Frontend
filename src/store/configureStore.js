@@ -8,7 +8,7 @@ const store = configureStore({
     tasks:taskReducer,
     users:userReducer,
     },
-    middleware:(getDefaultMiddleware)=>[...getDefaultMiddleware(),error,api],
+    middleware:(getDefaultMiddleware)=>[...getDefaultMiddleware()],
 })
 
 export default store;

@@ -16,7 +16,7 @@ function Registration() {
         password:"",
         firstName:"",
         lastName:"",
-        phoneNumber:"",
+        phone:"",
         confirmPassword:"",
     })
     const [showPassword, setShowPassword] = useState(false);
@@ -34,6 +34,7 @@ function Registration() {
       const handleSubmit = async (event) => {
         event.preventDefault();
         const formErrors = validateForm();
+        console.log(signInFormData,"line37");
         if (Object.keys(formErrors).length === 0) {
             setLoader(true)
             dispatch(createUsers(signInFormData))
@@ -45,7 +46,7 @@ function Registration() {
             .catch((error) => {
               setLoader(false);
               sweetAlert("Something went wrong", error.message, "danger", "Close");
-              console.error(error);
+              console.error(error,"line48");
             });
         } else {
           setLoader(false);
@@ -61,8 +62,8 @@ function Registration() {
           ) {
             formErrors.email = 'Invalid email address';
           }
-          if (!signInFormData.phoneNumber.trim()) {
-            formErrors.phoneNumber = 'Phone number is required';
+          if (!signInFormData.phone.trim()) {
+            formErrors.phone = 'Phone number is required';
           }
         if (!signInFormData.password.trim()) {
             formErrors.password = 'Password is required';
@@ -111,8 +112,8 @@ function Registration() {
                   {errors?.email && <div style={{color:"red"}}>{errors?.email}</div>}
                 </div>
                 <div className='col-6 mb-4'>
-                <TextField sx={{ m: 1, width: '90%' }} id="outlined-basic" label="Phone Number*" type="number" name ="phoneNumber" variant="outlined" value={signInFormData?.phoneNumber} onChange={handleChange}/>
-                {errors?.phoneNumber && <div style={{color:"red"}}>{errors?.phoneNumber}</div>}
+                <TextField sx={{ m: 1, width: '90%' }} id="outlined-basic" label="Phone Number*" type="number" name ="phone" variant="outlined" value={signInFormData?.phone} onChange={handleChange}/>
+                {errors?.phone && <div style={{color:"red"}}>{errors?.phone}</div>}
               </div>
                 </div>
                 <div className='row'>

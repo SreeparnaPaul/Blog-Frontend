@@ -1,69 +1,72 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import api from "./middleware/api";
 
-import { apiCallBegan } from "./api";
 const initialState={
     users:[],
     loading:false,
     error:null
 }
-let id = 0;
 
+//CREATE
+export const createUsers = createAsyncThunk("user/create", async (postData) => {
+    try {
+      const response = await api(
+        `${process.env.REACT_APP_API}/user/create-user`,
+        "POST",
+        postData
+      );
+  
+      return response.data;
+    } catch (err) {
+      console.error(err);
+    }
+  });
+
+  export const loadUsers = createAsyncThunk(
+    "users/getUsers",
+    async (param) => {
+      const response = await api(
+        `${process.env.REACT_APP_API}/user`,
+        "GET",
+        ""
+      );
+      return response.data;
+    }
+  );
 const userSlice = createSlice({
     name : "users",
     initialState,
-    reducers:{
-        //action : function
-        apiRequested:(state,action)=>{
-            state.loading = true
-        },
-        apiRequestFailed:(state,action)=>{
-            state.loading = false
-        },
-        getUsers:(state,action)=>{
-           state.users = action.payload
-           state.loading = false
-        },
-        addUser :(state,action) => {
-            state.users.push(action.payload);
-        },
-        // removeTask : (state,action)=>{
-        //     const index = state.tasks.findIndex(task=>task.id === action.payload.id)
-        //     state.tasks.splice(index,1)
-        // },
-        // completedTask : (state,action) => {
-        //     const index = state.findIndex(task=>task.id === action.payload.id)
-        //     state.tasks[index].completed = action.payload.completed
-        // }
-    },
+    reducers: {},
+  extraReducers: (builder) => {
+    // Add a case for the `getUserGroupByEmail` action
+    builder.addCase(createUsers.pending, (state) => {
+        state.loading = true;
+      });
+  
+      builder.addCase(createUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.data = action.payload;
+      });
+  
+      builder.addCase(createUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+      builder.addCase(loadUsers.pending, (state) => {
+        state.loading = true;
+      });
+  
+      builder.addCase(loadUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.users = action.payload;
+      });
+      builder.addCase(loadUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+}
 
 })
 
-export const {apiRequested,apiRequestFailed, getUsers, addUser} = userSlice.actions
 export default userSlice.reducer;
 
-//Action creators
-
-export const loadUsers = () =>apiCallBegan({
-    url:`/user`,
-    onStart:apiRequested.type,
-    onSuccess:getUsers.type,
-    onError:apiRequestFailed.type
-})
-
-export const createUsers = (signInFormData) => apiCallBegan({
-    url:"/user/create-user",
-    method:"POST",
-    data: signInFormData,
-    onSuccess:addUser.type,
-})
-// export const updateCompleted = task => apiCallBegan({
-//     url : `${url}/${task.id}`,
-//     method: "PATCH",
-//     data: task,
-//     onSuccess: completedTask.type
-// })
-// export const deleteTask = task => apiCallBegan({
-//     url : `${url}/${task.id}`,
-//     method: "DELETE",
-//     onSuccess: removeTask.type
-// })

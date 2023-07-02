@@ -14,7 +14,7 @@ function WriteBlog() {
     })
     const [description,setDescription] =useState("")
   return (
-    <div className='container mt-4'>
+    <div className='container mt-4' >
      <h2 style={{textAlign:"left"}}>Write a blog</h2> 
       <div className='row mt-4'>
       <div className='col md-6'>

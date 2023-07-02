@@ -14,7 +14,7 @@ const Navbar = lazy(()=> import("./components/Navbar"))
 function App() {  
 
   return (
-   <div className='App'>
+   <div className='App' >
    <Provider store={store}>
    <BrowserRouter>
     <Suspense fallback={<div>Loading...</div>}>
