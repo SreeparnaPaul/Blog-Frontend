@@ -7,7 +7,7 @@ const api = async (url, method, data) => {
   };
   const token = JSON.parse(localStorage.getItem("token"));
   if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+    headers["Authorization"] = `${token}`;
   }
   try {
     const response = await axios.request({

@@ -3,28 +3,63 @@ import ImageUploader from '../components/ImageUploader'
 import {Form} from "react-bootstrap"
 import { TextField,InputLabel,MenuItem,FormControl,Select, Button } from '@mui/material'
 import { Editor } from '@tinymce/tinymce-react';
-
+import { useDispatch} from "react-redux"
+import { createBlog } from '../store/blog';
+import { sweetAlert } from "../Utils/sweetAlert";
+import { Loader } from '../Utils/Loader';
 function WriteBlog() {
 
     const [writeBlogForm,setWriteBlogForm]=useState({
         title:"",
         featured:"",
-        category:"",
+        category:0,
         
     })
     const [description,setDescription] =useState("")
+    const [base64Data, setBase64Data] = useState('');
 
-    const handleSubmit=()=>{
-      
+  const handleBase64Data = (data) => {
+    setBase64Data(data); // Update base64Data in the parent component
+  };
+  const [imageUploading, setImageUploading] = useState(false);
+  const [error, setError] = useState('');
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    try {
+      setImageUploading(true);
+      const postBlog={
+        blogImageBase64Code: base64Data,
+        categoryId: writeBlogForm.category,
+        description:description,
+        featured: writeBlogForm.featured,
+        title: writeBlogForm.title,
+      }
+      console.log(postBlog,"line36");
+      // Dispatch the action to post the blog
+      dispatch(createBlog(postBlog));
+
+      // Reset form fields or navigate to another page
+      // ...
+
+    } catch (error) {
+      console.error('Error:', error);
+      setError('An error occurred while submitting the form.');
+      sweetAlert("Oops!",error,"error")
+    } finally {
+      setImageUploading(false);
+      sweetAlert("Success","Blog created successfully","success")
     }
+  };
   return (
     <div className='container mt-4' >
      <h2 style={{textAlign:"left"}}>Write a blog</h2> 
       <div className='row mt-4'>
       <div className='col md-6'>
-      <ImageUploader />
+      <ImageUploader onBase64Data={handleBase64Data} />
       </div>
       <div className='col md-6'>
+      <Loader loader={imageUploading}/>
       <Form>
         <div className='row'>
         <div className='col-4 mb-4 '>
@@ -99,7 +134,7 @@ function WriteBlog() {
       </div>
        </div>
       <div style={{display:"flex",justifyContent:"center"}}>
-      <Button variant="contained" style={{marginRight:"5px"}}> Submit </Button>
+      <Button variant="contained" style={{marginRight:"5px"}} onClick={()=>handleSubmit()}> Submit </Button>
       <Button variant='light' style={{border:"1px solid black"}}> Cancel </Button>
       </div>
     </div>

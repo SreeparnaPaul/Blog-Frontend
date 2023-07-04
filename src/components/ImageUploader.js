@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import './imageUploader.css';
 
-const ImageUploader = () => {
+const ImageUploader = ({onBase64Data}) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   const onDrop = (acceptedFiles) => {
@@ -13,6 +13,7 @@ const ImageUploader = () => {
         const base64Data = reader.result;
         const uploadedFile = { name: file.name, base64Data };
         setUploadedFiles((prevUploadedFiles) => [...prevUploadedFiles, uploadedFile]);
+        onBase64Data(base64Data); // Pass base64Data to parent component
       };
 
       reader.readAsDataURL(file);
@@ -40,7 +41,7 @@ const ImageUploader = () => {
             {uploadedFiles.map((file, index) => (
               <div key={index}>
                 <p>{file.name}</p>
-                <img src={file.base64Data} alt="" />
+                <img src={file.base64Data} alt="" style={{height:"200px",width:"200px"}}/>
               </div>
             ))}
           </div>
