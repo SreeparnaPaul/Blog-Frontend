@@ -24,7 +24,7 @@ const ImageUploader = () => {
     accept: 'image/*',
     minSize: 1,
     maxSize: 5242880, // 5MB
-    maxFiles: 2,
+    maxFiles: 1,
   });
 
   return (
@@ -40,7 +40,7 @@ const ImageUploader = () => {
             {uploadedFiles.map((file, index) => (
               <div key={index}>
                 <p>{file.name}</p>
-                <img src={file.base64Data} alt={file.name} />
+                <img src={file.base64Data} alt="" />
               </div>
             ))}
           </div>

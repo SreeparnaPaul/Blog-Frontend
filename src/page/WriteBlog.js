@@ -13,6 +13,10 @@ function WriteBlog() {
         
     })
     const [description,setDescription] =useState("")
+
+    const handleSubmit=()=>{
+      
+    }
   return (
     <div className='container mt-4' >
      <h2 style={{textAlign:"left"}}>Write a blog</h2> 
@@ -30,7 +34,7 @@ function WriteBlog() {
         </div>
         <div className='col-4 mb-4'>
         <FormControl fullWidth sx={{ m: 1 }}>
-  <InputLabel id="demo-simple-select-label">Featured</InputLabel>
+  <InputLabel id="demo-simple-select-label">Featured*</InputLabel>
   <Select
     labelId="demo-simple-select-label"
     id="demo-simple-select"
@@ -47,7 +51,7 @@ function WriteBlog() {
         </div>
         <div className='col-4 mb-4'>
         <FormControl fullWidth sx={{ m: 1 }}>
-  <InputLabel id="demo-simple-select-label">Category</InputLabel>
+  <InputLabel id="demo-simple-select-label">Category*</InputLabel>
   <Select
     labelId="demo-simple-select-label"
     id="demo-simple-select"
@@ -56,23 +60,26 @@ function WriteBlog() {
     onChange={(e)=>setWriteBlogForm({...writeBlogForm,
         category:e.target.value})}
   >
-    <MenuItem value="travel">Travel</MenuItem>
-    <MenuItem value="health">Health</MenuItem>
-    <MenuItem value="politics">Politics</MenuItem>
-    <MenuItem value="science">Science</MenuItem>
-    <MenuItem value="food">Food</MenuItem>
+    <MenuItem value={1}>Travel</MenuItem>
+    <MenuItem value={2}>Health</MenuItem>
+    <MenuItem value={3}>Politics</MenuItem>
+    <MenuItem value={4}>Science</MenuItem>
+    <MenuItem value={5}>Food</MenuItem>
   </Select>
 </FormControl>
         </div>
         </div>
         <div className='row'>
         <div className='col-12 mb-4 '>
+     
         <Editor
         apiKey='cme7yw30dyr4gxd1oilqmv1janb6idyftix4i5q5z8h0d4gb'
         onInit={(evt, editor) => console.log(editor)}
+        // placeholder="Write your content here"
         init={{
             height: 300,
             menubar: false,
+            placeholder:"Write your content here",
             plugins: [
                 'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
                 'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',

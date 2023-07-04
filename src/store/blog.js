@@ -2,16 +2,16 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import api from "./middleware/api";
 
 const initialState={
-    category:[],
+    blog:[],
     loading:false,
     error:null
 }
 
 //CREATE
-export const createCatgory = createAsyncThunk("category/create", async (postData) => {
+export const createBlog = createAsyncThunk("blog/create", async (postData) => {
     try {
       const response = await api(
-        `${process.env.REACT_APP_API}/category`,
+        `${process.env.REACT_APP_API}/blog/create-blog`,
         "POST",
         postData
       );
@@ -22,8 +22,8 @@ export const createCatgory = createAsyncThunk("category/create", async (postData
     }
   });
 
-  export const loadCatgory = createAsyncThunk(
-    "category/getCategory",
+  export const loadBlog = createAsyncThunk(
+    "blog/getBlog",
     async (param) => {
       const response = await api(
         `${process.env.REACT_APP_API}/category`,
@@ -33,34 +33,34 @@ export const createCatgory = createAsyncThunk("category/create", async (postData
       return response.data;
     }
   );
-const categorySlice = createSlice({
-    name : "category",
+const blogSlice = createSlice({
+    name : "blog",
     initialState,
     reducers: {},
   extraReducers: (builder) => {
     // Add a case for the `getUserGroupByEmail` action
-    builder.addCase(createCatgory.pending, (state) => {
+    builder.addCase(createBlog.pending, (state) => {
         state.loading = true;
       });
   
-      builder.addCase(createCatgory.fulfilled, (state, action) => {
+      builder.addCase(createBlog.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
       });
   
-      builder.addCase(createCatgory.rejected, (state, action) => {
+      builder.addCase(createBlog.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
-      builder.addCase(loadCatgory.pending, (state) => {
+      builder.addCase(loadBlog.pending, (state) => {
         state.loading = true;
       });
   
-      builder.addCase(loadCatgory.fulfilled, (state, action) => {
+      builder.addCase(loadBlog.fulfilled, (state, action) => {
         state.loading = false;
-        state.category = action.payload;
+        state.blog = action.payload;
       });
-      builder.addCase(loadCatgory.rejected, (state, action) => {
+      builder.addCase(loadBlog.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
@@ -68,5 +68,5 @@ const categorySlice = createSlice({
 
 })
 
-export default categorySlice.reducer;
+export default blogSlice.reducer;
 
