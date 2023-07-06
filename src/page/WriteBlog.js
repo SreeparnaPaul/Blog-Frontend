@@ -7,6 +7,7 @@ import { useDispatch} from "react-redux"
 import { createBlog } from '../store/blog';
 import { sweetAlert } from "../utils/sweetAlert";
 import { Loader } from '../utils/Loader';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 function WriteBlog() {
 
     const [writeBlogForm,setWriteBlogForm]=useState({
@@ -17,7 +18,7 @@ function WriteBlog() {
     })
     const [description,setDescription] =useState("")
     const [base64Data, setBase64Data] = useState('');
-
+    const history= useHistory()
   const handleBase64Data = (data) => {
     setBase64Data(data); // Update base64Data in the parent component
   };
@@ -49,6 +50,7 @@ function WriteBlog() {
     } finally {
       setImageUploading(false);
       sweetAlert("Success","Blog created successfully","success")
+      history.goBack("/")
     }
   };
   return (

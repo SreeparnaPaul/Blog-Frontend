@@ -11,6 +11,7 @@ const SignIn =lazy(()=>import('./page/SignIn'));
 
 const Home = lazy(()=>import("./page/Home"))
 const Navbar = lazy(()=> import("./components/Navbar"))
+const ViewBlog = lazy(()=> import("./page/ViewBlog"))
 function App() {  
 
   return (
@@ -23,7 +24,8 @@ function App() {
      <Route exact path="/" render={() => <><Navbar /><Home /></>} />
      <Route path="/signIn" component={SignIn}/>
      <Route path="/registration" component={Registration}/>
-     <Route path="/writeBlog" render={() => <><Navbar /><WriteBlog /></>} />
+     <Route path="/writeBlog" render={() => <><Navbar /><WriteBlog /></>} />  
+     <Route path="/viewBlog" render={() => <><Navbar /><ViewBlog /></>} />
      </Switch>
     </Suspense>
     </BrowserRouter>

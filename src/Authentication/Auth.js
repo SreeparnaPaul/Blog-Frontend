@@ -150,10 +150,16 @@ fetch(`${process.env.REACT_APP_API}/user`, requestOptions)
      localStorage.removeItem("loggedInUser");
     localStorage.clear();
     window.location.reload();
+    const token = JSON.parse(localStorage.getItem("token"));
+    var myHeaders = new Headers();
+    if (token) {
+      myHeaders["Authorization"] = `${token}`;
+    }
     // Send a request to your authentication server
     var requestOptions = {
       method: "POST",
       redirect: "follow",
+      headers: myHeaders,
       credentials: "include",
     };
 
