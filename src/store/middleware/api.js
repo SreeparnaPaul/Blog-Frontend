@@ -1,6 +1,6 @@
 import axios from "axios";
 const api = async (url, method, data) => {
-  // Add the 'DMS_Token' cookie to the request headers
+  // Add the 'blogify token' cookie to the request headers
 
   const headers = {
     "Content-Type": "application/json",
