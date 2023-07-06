@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { sweetAlert } from "../Utils/sweetAlert";
+import { sweetAlert } from "../utils/sweetAlert";
 
 const Auth = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));

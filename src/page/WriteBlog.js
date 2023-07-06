@@ -5,8 +5,8 @@ import { TextField,InputLabel,MenuItem,FormControl,Select, Button } from '@mui/m
 import { Editor } from '@tinymce/tinymce-react';
 import { useDispatch} from "react-redux"
 import { createBlog } from '../store/blog';
-import { sweetAlert } from "../Utils/sweetAlert";
-import { Loader } from '../Utils/Loader';
+import { sweetAlert } from "../utils/sweetAlert";
+import { Loader } from '../utils/Loader';
 function WriteBlog() {
 
     const [writeBlogForm,setWriteBlogForm]=useState({
