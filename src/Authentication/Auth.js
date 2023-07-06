@@ -146,28 +146,30 @@ fetch(`${process.env.REACT_APP_API}/user`, requestOptions)
 
   // Function to handle user logout
   const logout = async () => {
-    localStorage.removeItem("token");
-     localStorage.removeItem("loggedInUser");
-    localStorage.clear();
-    window.location.reload();
+   
     const token = JSON.parse(localStorage.getItem("token"));
     var myHeaders = new Headers();
+    myHeaders.append("accept", "*/*");
     if (token) {
-      myHeaders["Authorization"] = `${token}`;
+      myHeaders.append("Authorization",token);
     }
     // Send a request to your authentication server
     var requestOptions = {
       method: "POST",
-      redirect: "follow",
       headers: myHeaders,
-      credentials: "include",
+     
     };
-
+  
     await fetch(`${process.env.REACT_APP_API}/authentication/logout`, requestOptions)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
+      
     setToken(null);
+    localStorage.removeItem("token");
+      localStorage.removeItem("loggedInUser");
+     localStorage.clear();
+     window.location.reload();
   };
 
   // Function to check if the user is logged in
