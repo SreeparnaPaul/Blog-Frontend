@@ -6,11 +6,11 @@ function About() {
   return (
     <div style={{ backgroundImage: `url(${loginImage})`, backgroundRepeat: "no-repeat", minHeight: "90vh", backgroundSize: "cover", display: "flex", alignItems: "center", justifyContent: "center" }}>
     <div className='container' >
-      <h2 style={{color:"#525050"}}>"Welcome to Blogify: Exploring the World Through Five Engaging Categories"</h2>
+      <h2 style={{color:"#525050"}}>"Welcome to BlogiFy: Exploring the World Through Five Engaging Categories"</h2>
       <Card sx={{ minWidth: 400, backgroundImage: `url(${about})`, color: 'white',marginTop:2 }}>
         <CardContent>
           <Typography variant="body2" sx={{ fontStyle: 'italic', fontSize: 20, marginBottom: 2 }}>
-            Welcome to Blogify, your one-stop destination for diverse and captivating content that covers an array of topics.
+            Welcome to BlogiFy, your one-stop destination for diverse and captivating content that covers an array of topics.
             With our five distinct categories—Health, Politics, Science, Food, and Travel—our aim is to provide you with insightful articles that both inform and inspire.
             Whether you're seeking advice on leading a healthier lifestyle, staying up-to-date with the latest political developments, delving into fascinating scientific discoveries,
             exploring delectable cuisines, or embarking on exciting travel journeys, Blogify has something for everyone. Let's dive into the captivating world of ideas and knowledge!
