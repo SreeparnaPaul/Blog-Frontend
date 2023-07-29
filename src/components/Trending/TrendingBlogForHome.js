@@ -7,7 +7,7 @@ function TrendingBlogForHome() {
     <div style={{marginTop:"20px"}}>
     <Card style={{padding:"30px"}}>
     <Card.Title style={{textAlign:"left",paddingLeft:"30px"}}>
-   <h1>Trending Blogs</h1>
+   <h1>Featured Blogs</h1>
     </Card.Title>
     <Card.Body>
      <TrendingBlogCard/>

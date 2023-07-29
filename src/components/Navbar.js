@@ -119,8 +119,13 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center" component="a"
                   href="/about">About</Typography>
                 </MenuItem>
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Blogs</Typography>
+                <MenuItem  onClick={(e)=>{
+                  e.preventDefault()
+                  history.push("/blogs")
+                
+                }}>
+                  <Typography textAlign="center" component="a"
+                  href="/blogs">Blogs</Typography>
                 </MenuItem>
            
             </Menu>
@@ -167,7 +172,11 @@ function ResponsiveAppBar() {
               About
             </Button>
             <Button
-            onClick={handleCloseNavMenu}
+            onClick={(e)=>{
+              e.preventDefault()
+              history.push("/blogs")
+            
+            }}
             sx={{ my: 2, color: 'white', display: 'block' }}
           >
             Blogs
