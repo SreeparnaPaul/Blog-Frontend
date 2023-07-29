@@ -16,7 +16,6 @@ import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Auth from '../Authentication/Auth';
 
-const pages = ['Home', 'About', 'Blogs'];
 
 
 function ResponsiveAppBar() {
@@ -112,8 +111,13 @@ function ResponsiveAppBar() {
                   <Typography textAlign="center" component="a"
                   href="/">Home</Typography>
                 </MenuItem>
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">About</Typography>
+                <MenuItem  onClick={(e)=>{
+                  e.preventDefault()
+                  history.push("/about")
+                
+                }}>
+                  <Typography textAlign="center" component="a"
+                  href="/about">About</Typography>
                 </MenuItem>
                 <MenuItem  onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Blogs</Typography>
@@ -141,15 +145,33 @@ function ResponsiveAppBar() {
           BlogiFy
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+           
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+              onClick={(e)=>{
+                e.preventDefault()
+                history.push("/")
+              
+              }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                Home
               </Button>
-            ))}
+              <Button
+                onClick={(e)=>{
+                e.preventDefault()
+                history.push("/about")
+              
+              }}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              About
+            </Button>
+            <Button
+            onClick={handleCloseNavMenu}
+            sx={{ my: 2, color: 'white', display: 'block' }}
+          >
+            Blogs
+          </Button>
           </Box>
          {token?
           <Box sx={{ flexGrow: 0}}>

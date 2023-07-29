@@ -12,6 +12,7 @@ const SignIn =lazy(()=>import('./page/SignIn'));
 const Home = lazy(()=>import("./page/Home"))
 const Navbar = lazy(()=> import("./components/Navbar"))
 const ViewBlog = lazy(()=> import("./page/ViewBlog"))
+const About = lazy(()=> import("./page/About"))
 function App() {  
 
   return (
@@ -26,6 +27,8 @@ function App() {
      <Route path="/registration" component={Registration}/>
      <Route path="/writeBlog" render={() => <><Navbar /><WriteBlog /></>} />  
      <Route path="/viewBlog" render={() => <><Navbar /><ViewBlog /></>} />
+     <Route path="/about" render={() => <><Navbar /><About /></>} />
+
      </Switch>
     </Suspense>
     </BrowserRouter>
