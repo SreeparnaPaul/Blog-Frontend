@@ -65,7 +65,7 @@ function Registration() {
           if (!signInFormData.phone.trim()) {
             formErrors.phone = 'Phone number is required';
           }
-        if (!signInFormData.password.trim()) {
+          if (!signInFormData.password.trim()) {
             formErrors.password = 'Password is required';
           } 
           if (!signInFormData.confirmPassword.trim()) {
@@ -77,6 +77,9 @@ function Registration() {
           if (!signInFormData.lastName.trim()) {
             formErrors.username = 'Last name is required';
           } 
+           if (signInFormData.password.trim() !== signInFormData.confirmPassword.trim()) {
+            formErrors.confirmPassword = "Passwords do not match";
+          }
         return formErrors;
       };
   return (
